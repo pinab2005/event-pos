@@ -129,11 +129,11 @@ export default function POSScreen({ menuItems }: { menuItems: MenuItem[] }) {
 
   return (
     <>
-      <div className="flex h-screen bg-zinc-100">
+      <div className="flex h-full bg-zinc-100">
         {/* Menu grid */}
         <div className="flex-1 overflow-y-auto p-5">
-          <h1 className="text-2xl font-bold text-zinc-900 mb-4">Menu</h1>
-          <div className="grid grid-cols-2 gap-3">
+          <p className="text-xs font-semibold text-zinc-400 tracking-widest mb-3">MENU</p>
+          <div className="grid grid-cols-3 gap-3">
             {menuItems.map(item => (
               <button
                 key={item.id}
@@ -212,16 +212,16 @@ export default function POSScreen({ menuItems }: { menuItems: MenuItem[] }) {
                   ? 'bg-green-500 text-white'
                   : status === 'error'
                   ? 'bg-red-500 text-white'
-                  : 'bg-green-600 hover:bg-green-700 text-white disabled:opacity-40 disabled:cursor-not-allowed'
+                  : 'bg-orange-500 hover:bg-orange-600 text-white disabled:opacity-40 disabled:cursor-not-allowed'
               }`}
             >
               {isPending
                 ? 'Placing...'
                 : status === 'success'
-                ? '✓ Order Placed!'
+                ? '✓ Order Submitted!'
                 : status === 'error'
                 ? 'Error — Try Again'
-                : 'Place Order'}
+                : 'Submit Order'}
             </button>
           </div>
         </div>
@@ -246,7 +246,7 @@ export default function POSScreen({ menuItems }: { menuItems: MenuItem[] }) {
                   onClick={() => toggleModifier(modifier)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl border-2 transition-all text-left ${
                     checkedIds.has(modifier.id)
-                      ? 'border-green-500 bg-green-50'
+                      ? 'border-orange-500 bg-orange-50'
                       : 'border-zinc-200 bg-white hover:border-zinc-300'
                   }`}
                 >
@@ -267,7 +267,7 @@ export default function POSScreen({ menuItems }: { menuItems: MenuItem[] }) {
               </button>
               <button
                 onClick={confirmAdd}
-                className="flex-1 py-2.5 rounded-xl bg-green-600 text-white font-bold hover:bg-green-700 active:scale-95 transition-all"
+                className="flex-1 py-2.5 rounded-xl bg-orange-500 text-white font-bold hover:bg-orange-600 active:scale-95 transition-all"
               >
                 Add to Order
               </button>

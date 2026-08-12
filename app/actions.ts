@@ -1,6 +1,7 @@
 'use server'
 
 import sql from "@/lib/db";
+import { revalidatePath } from "next/cache";
 import type { CartItem } from "@/lib/types";
 
 export async function placeOrder(cart: CartItem[], total: number): Promise<number> {
@@ -21,4 +22,10 @@ export async function placeOrder(cart: CartItem[], total: number): Promise<numbe
   }
 
   return orderId;
+}
+
+export async function updateOrderStatus(orderId: number, status: string) {
+  await sql`UPDATE orders SET status = ${status} WHERE id = ${orderId}`;
+  revalidatePath('/orders');
+  revalidatePath('/kitchen');
 }
